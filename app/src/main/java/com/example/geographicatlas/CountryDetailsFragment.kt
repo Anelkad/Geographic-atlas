@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.geographicatlas.databinding.FragmentCountryDetailsBinding
 
 class CountryDetailsFragment : Fragment() {
@@ -16,7 +17,10 @@ class CountryDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCountryDetailsBinding.inflate(inflater, container, false)
-        // Inflate the layout for this fragment
+
+        binding.toolBar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
         return binding.root
     }
 

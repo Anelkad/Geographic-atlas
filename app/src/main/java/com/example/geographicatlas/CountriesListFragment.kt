@@ -19,10 +19,10 @@ class CountriesListFragment : Fragment() {
     ): View {
         binding = FragmentCountriesListBinding.inflate(inflater,container,false)
 
-        binding.button.setOnClickListener {
-            findNavController().navigate(R.id.action_countriesListFragment_to_countryDetailsFragment)
-        }
-        // Inflate the layout for this fragment
+//        binding.button.setOnClickListener {
+//            findNavController().navigate(R.id.action_countriesListFragment_to_countryDetailsFragment)
+//        }
+
         return binding.root
     }
 }
