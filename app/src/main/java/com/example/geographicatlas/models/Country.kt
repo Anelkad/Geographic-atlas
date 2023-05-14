@@ -5,6 +5,7 @@ class Country {
     var capital = ArrayList<String>()
     var flags: Flags? = null
     var maps: Maps? = null
+    var cca2: String = ""
     var continents = ArrayList<String>()
     var subregion: String = ""
     var population: Int = 0
@@ -12,6 +13,7 @@ class Country {
     var capitalInfo = HashMap<String, ArrayList<Float>>()
     var area: Float = 0F
     var timezones = ArrayList<String>()
+    var isExpanded = false
 
     override fun toString(): String {
         return "{{{ name ${name?.common} ," +
@@ -25,5 +27,8 @@ class Country {
                 "capitalInfo ${capitalInfo.values} ," +
                 "area $area ," +
                 "timezomes $timezones }}}"
+    }
+    fun changeExpanded(){
+        this.isExpanded = !this.isExpanded
     }
 }

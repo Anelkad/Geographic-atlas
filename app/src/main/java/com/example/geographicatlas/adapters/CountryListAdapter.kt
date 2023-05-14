@@ -1,8 +1,10 @@
 package com.example.geographicatlas.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.rotationMatrix
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -11,7 +13,8 @@ import com.example.geographicatlas.databinding.CountryListItemBinding
 import com.example.geographicatlas.models.Country
 
 class CountryListAdapter(
-    var countryList: ArrayList<Country>
+    var countryList: ArrayList<Country>,
+    val learnMoreClickListener:((String)-> Unit)
 ): RecyclerView.Adapter<CountryListAdapter.HolderCountry>() {
 
     lateinit var binding: CountryListItemBinding
@@ -47,6 +50,7 @@ class CountryListAdapter(
         val population = country.population
         val area = country.area
         val currencies = country.currencies.keys
+        val cca2 = country.cca2
 
         Glide
             .with(holder.flag.context)
@@ -60,13 +64,24 @@ class CountryListAdapter(
         holder.population.text = population.toString()
         holder.area.text = area.toString()
         holder.currencies.text = "$currencies"
+        holder.countryDetailsButton.setOnClickListener { learnMoreClickListener(cca2) }
+        holder.expandedDetails.isVisible = country.isExpanded
 
         var rotationAngle = 0
-
+        if (country.isExpanded) {
+            holder.expandButton.rotation = 180F
+            rotationAngle = 180
+        }
         holder.expandButton.setOnClickListener {
-            rotationAngle = if (rotationAngle == 0) 180 else 0
-            holder.expandedDetails.isVisible = !holder.expandedDetails.isVisible
+            if (!country.isExpanded)
+                rotationAngle = if (rotationAngle == 0) 180 else 0
+            else
+                rotationAngle = if (rotationAngle == 180) 0 else 180
+
+            country.changeExpanded()
+            holder.expandedDetails.isVisible = country.isExpanded
             holder.expandButton.animate().rotation(rotationAngle.toFloat()).start()
+            //Log.i("Rotation angle", rotationAngle.toString())
         }
     }
 

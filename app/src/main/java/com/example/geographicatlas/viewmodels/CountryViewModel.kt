@@ -16,13 +16,22 @@ import javax.inject.Inject
 open class CountryViewModel@Inject constructor(
     private val repository: CountryRepository
 ): ViewModel()  {
-    private val _countryListState = MutableLiveData<Resource<HashMap<String, ArrayList<Country>>>?>(null)
-    val countryListState: LiveData<Resource<HashMap<String, ArrayList<Country>>>?> = _countryListState
+    private val _countryListState = MutableLiveData<Resource<List<Pair<String, ArrayList<Country>>>>?>(null)
+    val countryListState: LiveData<Resource<List<Pair<String, ArrayList<Country>>>>?> = _countryListState
+
+    private val _countryDetailsState = MutableLiveData<Resource<Country>?>(null)
+    val countryDetailsState: LiveData<Resource<Country>?> = _countryDetailsState
 
     fun getRegionsCountryList() = viewModelScope.launch(Dispatchers.IO) {
         _countryListState.postValue(Resource.Loading)
         val result = repository.getRegionMap()
         _countryListState.postValue(result)
+    }
+
+    fun getCountryDetails(cca2: String) = viewModelScope.launch(Dispatchers.IO){
+        _countryDetailsState.postValue(Resource.Loading)
+        val result = repository.getCountryDetails(cca2)
+        _countryDetailsState.postValue(result)
     }
 
 }

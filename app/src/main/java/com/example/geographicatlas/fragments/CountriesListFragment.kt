@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.example.geographicatlas.R
 import com.example.geographicatlas.adapters.RegionsCountryListAdapter
 import com.example.geographicatlas.databinding.FragmentCountriesListBinding
 import com.example.geographicatlas.models.Country
@@ -21,10 +23,13 @@ class CountriesListFragment : Fragment() {
 
     lateinit var binding: FragmentCountriesListBinding
     lateinit var regionAdapter: RegionsCountryListAdapter
-    lateinit var regionMap: HashMap<String, ArrayList<Country>>
     lateinit var regionPairList: List<Pair<String, ArrayList<Country>>>
 
-    val countryViewModel by activityViewModels<CountryViewModel>()
+    private val countryViewModel by activityViewModels<CountryViewModel>()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        countryViewModel.getRegionsCountryList()
+        super.onCreate(savedInstanceState)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,8 +39,6 @@ class CountriesListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        countryViewModel.getRegionsCountryList()
         countryViewModel.countryListState.observe(viewLifecycleOwner, Observer{
             when(it){
                 is Resource.Failure -> {
@@ -46,17 +49,20 @@ class CountriesListFragment : Fragment() {
                 }
                 is Resource.Success -> {
                     binding.progressBar.isVisible = false
-                    regionMap = it.getSuccessResult()
-                    regionPairList = regionMap.toList()
-                    regionAdapter = RegionsCountryListAdapter(regionPairList)
+                    regionPairList = it.getSuccessResult()
+                    regionAdapter = RegionsCountryListAdapter(regionPairList) {
+                        val bundle = Bundle().apply {
+                            putString("cca2", it)
+                        }
+                        findNavController().navigate(
+                            R.id.action_countriesListFragment_to_countryDetailsFragment,
+                            bundle
+                        )
+                    }
                     binding.regionList.adapter = regionAdapter
-                    Log.i("country list", it.getSuccessResult().keys.toString())
                 }
                 else -> Unit
             }
         })
-//        binding.button.setOnClickListener {
-//            findNavController().navigate(R.id.action_countriesListFragment_to_countryDetailsFragment)
-//        }
     }
 }

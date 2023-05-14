@@ -8,7 +8,8 @@ import com.example.geographicatlas.databinding.RegionCountriesItemBinding
 import com.example.geographicatlas.models.Country
 
 class RegionsCountryListAdapter(
-    val regionPairList: List<Pair<String, ArrayList<Country>>>
+    val regionPairList: List<Pair<String, ArrayList<Country>>>,
+    val learnMoreClickListener:((String)-> Unit)
 ) : RecyclerView.Adapter<RegionsCountryListAdapter.HolderRegion>() {
 
     lateinit var countryListAdapter: CountryListAdapter
@@ -35,7 +36,7 @@ class RegionsCountryListAdapter(
 
         holder.name.text = region
 
-        countryListAdapter = CountryListAdapter(countryList)
+        countryListAdapter = CountryListAdapter(countryList,learnMoreClickListener)
         holder.countryList.adapter = countryListAdapter
 
     }
