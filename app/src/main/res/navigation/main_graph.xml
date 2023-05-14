@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/countriesListFragment"
-        android:name="com.example.geographicatlas.CountriesListFragment"
+        android:name="com.example.geographicatlas.fragments.CountriesListFragment"
         android:label="fragment_countries_list"
         tools:layout="@layout/fragment_countries_list" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/countryDetailsFragment"
-        android:name="com.example.geographicatlas.CountryDetailsFragment"
+        android:name="com.example.geographicatlas.fragments.CountryDetailsFragment"
         android:label="fragment_country_details"
         tools:layout="@layout/fragment_country_details" />
 </navigation>

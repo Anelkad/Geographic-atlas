@@ -1,4 +1,4 @@
-package com.example.geographicatlas
+package com.example.geographicatlas.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

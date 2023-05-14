@@ -4,6 +4,7 @@ class Country {
     var name: Name? = null
     var capital = ArrayList<String>()
     var flags: Flags? = null
+    var maps: Maps? = null
     var continents = ArrayList<String>()
     var subregion: String = ""
     var population: Int = 0
@@ -13,14 +14,15 @@ class Country {
     var timezones = ArrayList<String>()
 
     override fun toString(): String {
-        return "{{{ name $name ," +
-                "capital $capital ," +
+        return "{{{ name ${name?.common} ," +
+                "capital ${capital} ," +
                 "flags ${flags?.png} ," +
-                "continents $continents ," +
+                "maps ${maps?.googleMaps} ," +
+                "continents ${continents} ," +
                 "subregion $subregion ," +
                 "population $population ," +
-                "currencies $currencies ," +
-                "capitalInfo $capitalInfo ," +
+                "currencies ${currencies.keys} ," +
+                "capitalInfo ${capitalInfo.values} ," +
                 "area $area ," +
                 "timezomes $timezones }}}"
     }

@@ -39,8 +39,11 @@ android {
 }
 
 dependencies {
+    //OkHttp
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
-    implementation 'com.beust:klaxon:5.5'
+
+    //GSON
+    implementation 'com.google.code.gson:gson:2.10.1'
 
     // Navigation Components
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.2"

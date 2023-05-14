@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/itemView"
+    android:layout_marginTop="24dp">
 
     <TextView
         android:id="@+id/regionTitle"
@@ -11,7 +14,6 @@
         android:layout_height="wrap_content"
         android:text="Asia"
         android:textAllCaps="true"
-        android:layout_marginTop="12dp"
         android:layout_marginStart="4dp"
         android:textAppearance="@style/region_title"/>
 
@@ -19,6 +21,7 @@
         android:id="@+id/countryListByRegion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/country_list_item"/>
+        tools:listitem="@layout/country_list_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 </LinearLayout>
