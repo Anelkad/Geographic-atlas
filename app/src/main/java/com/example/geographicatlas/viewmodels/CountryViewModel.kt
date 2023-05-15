@@ -16,6 +16,7 @@ import javax.inject.Inject
 open class CountryViewModel@Inject constructor(
     private val repository: CountryRepository
 ): ViewModel()  {
+
     private val _countryListState = MutableLiveData<Resource<List<Pair<String, ArrayList<Country>>>>?>(null)
     val countryListState: LiveData<Resource<List<Pair<String, ArrayList<Country>>>>?> = _countryListState
 
@@ -32,6 +33,10 @@ open class CountryViewModel@Inject constructor(
         _countryDetailsState.postValue(Resource.Loading)
         val result = repository.getCountryDetails(cca2)
         _countryDetailsState.postValue(result)
+    }
+
+    fun clearCountryDetailsState(){
+        _countryDetailsState.value = null
     }
 
 }

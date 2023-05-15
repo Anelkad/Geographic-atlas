@@ -4,7 +4,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.graphics.rotationMatrix
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -18,6 +17,7 @@ class CountryListAdapter(
 ): RecyclerView.Adapter<CountryListAdapter.HolderCountry>() {
 
     lateinit var binding: CountryListItemBinding
+    lateinit var expandedDetailsAdapter: ExpandedDetailsAdapter
 
     inner class HolderCountry(itemView: View): RecyclerView.ViewHolder(itemView){
         val flag = binding.countryFlagImageView
@@ -25,9 +25,7 @@ class CountryListAdapter(
         val capital = binding.CountryCapital
         val expandButton = binding.expandButton
         val expandedDetails = binding.expandedDetails
-        val population = binding.populationValue
-        val area = binding.areaValue
-        val currencies = binding.currenciesValue
+        val expandedDetailsList = binding.expandedDetailsList
         val countryDetailsButton = binding.countryDetailsButton
     }
 
@@ -47,9 +45,6 @@ class CountryListAdapter(
         val name = country.name?.common
         val flagImage = country.flags?.png
         val capital = if (country.capital.isNotEmpty()) country.capital[0] else ""
-        val population = country.population
-        val area = country.area
-        val currencies = country.currencies.keys
         val cca2 = country.cca2
 
         Glide
@@ -61,9 +56,10 @@ class CountryListAdapter(
 
         holder.name.text = name
         holder.capital.text = capital
-        holder.population.text = population.toString()
-        holder.area.text = area.toString()
-        holder.currencies.text = "$currencies"
+
+        expandedDetailsAdapter = ExpandedDetailsAdapter(country.toExpandedDetailsMap().toList())
+        holder.expandedDetailsList.adapter = expandedDetailsAdapter
+
         holder.countryDetailsButton.setOnClickListener { learnMoreClickListener(cca2) }
         holder.expandedDetails.isVisible = country.isExpanded
 

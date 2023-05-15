@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Geographic Atlas</string>
     <string name="page_title">World countries</string>
+    <string name="learn_more">Learn more</string>
 </resources>

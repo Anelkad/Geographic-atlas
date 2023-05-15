@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/itemView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,6 +10,7 @@
     android:layout_marginTop="12dp"
     android:paddingHorizontal="12dp"
     android:paddingTop="12dp"
+    android:paddingBottom="2dp"
     android:animateLayoutChanges="true">
 
     <LinearLayout
@@ -22,7 +24,6 @@
             android:layout_width="82dp"
             android:layout_height="48dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/img"
             android:layout_marginEnd="12dp"
             app:shapeAppearanceOverlay="@style/roundedCornersImageView"
             />
@@ -36,13 +37,13 @@
                 android:id="@+id/CountryName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kazakhstan"
+                android:text=""
                 android:textAppearance="@style/country"/>
             <TextView
                 android:id="@+id/CountryCapital"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Astana"
+                android:text=""
                 android:textAppearance="@style/capital"/>
         </LinearLayout>
 
@@ -59,82 +60,24 @@
         android:id="@+id/expandedDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/expandedDetailsList"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Population: "
-            android:textAppearance="@style/property"
-            android:layout_marginEnd="4dp"/>
-
-        <TextView
-            android:id="@+id/populationValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="19 mln"
-            android:textAppearance="@style/value"
-            android:textSize="15sp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginVertical="8dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Area: "
-            android:textAppearance="@style/property"
-            android:layout_marginEnd="4dp"/>
-
-        <TextView
-            android:id="@+id/areaValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2.725 mln km\u00C2\u00B2"
-            android:textAppearance="@style/value"
-            android:textSize="15sp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Currencies: "
-            android:textAppearance="@style/property"
-            android:layout_marginEnd="4dp"/>
-
-        <TextView
-            android:id="@+id/currenciesValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tenge (\u00E2\u0082\u00B8) (KZT)"
-            android:textAppearance="@style/value"
-            android:textSize="15sp"/>
-    </LinearLayout>
+            tools:listitem="@layout/expanded_details_item"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <TextView
             android:id="@+id/countryDetailsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#F7F8F9"
-            android:text="Learn more"
+            android:text="@string/learn_more"
             android:textAllCaps="true"
             android:padding="10dp"
-            android:layout_marginVertical="5dp"
+            android:layout_marginBottom="5dp"
             android:textAppearance="@style/learn_more_label"
             android:gravity="center_horizontal|center_vertical"
             />

@@ -19,10 +19,11 @@
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
-        android:indeterminateTint="@color/purple_700"
+        android:indeterminateTint="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginVertical="10dp"
         android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
