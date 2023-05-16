@@ -10,5 +10,5 @@ Android test assignment for the STRONG TEAM Summer Internship
 - Skeleton loading
 - expand/collapse animation
 - Navigation Component
-- CountryDetails: link to Google Maps tapping coordinates
+- CountryDetails: link to Google Maps by tapping coordinates
 - Push Notification by opening CountryDetails
