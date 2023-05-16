@@ -30,7 +30,7 @@ class Country {
                 "area $area ," +
                 "timezones $timezones }}}"
     }
-    fun changeExpanded(){
+    fun changeExpandStatus(){
         this.isExpanded = !this.isExpanded
     }
 
@@ -56,12 +56,8 @@ class Country {
         else if (area>=1000) "${area/1000} ${toStringWithZero(area%1000)}"
         else "${area%1000}"
     }
-    fun toDetailsMap(): Map<String,String>{
-        var currencyList = ArrayList<String>()
-        for (i in currencies.toList()) currencyList.add(
-            "${i.second.name} (${i.second.symbol}) (${i.first})"
-        )
 
+    private fun getCoordinatesText(): String{
         val coordinates = capitalInfo?.latlng
         var coordinatesText = ArrayList<String>()
         if (coordinates != null) {
@@ -71,10 +67,17 @@ class Country {
                         .plus(if (abs(i)%1*60<10) "0${(abs(i)%1*60).toInt()}'" else "${(abs(i)%1*60).toInt()}'")
                 )
         }
+        return coordinatesText.joinToString(separator = ", ")
+    }
+    fun toDetailsMap(): Map<String,String>{
+        var currencyList = ArrayList<String>()
+        for (i in currencies.toList()) currencyList.add(
+            "${i.second.name} (${i.second.symbol}) (${i.first})"
+        )
 
         return mapOf(
             "Capital:" to if (capital.isEmpty()) "" else capital[0],
-            "Capital coordinates:" to coordinatesText.joinToString(separator = ", "),
+            "Capital coordinates:" to getCoordinatesText(),
             "Population:" to getPopulationText(),
             "Area:" to "${getAreaText()} km\u00B2",
             "Currency:" to currencyList.joinToString(separator = "\n"),

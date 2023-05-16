@@ -1,12 +1,13 @@
 package com.example.geographicatlas.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -17,8 +18,9 @@ import com.example.geographicatlas.adapters.CountryDetailsAdapter
 import com.example.geographicatlas.databinding.FragmentCountryDetailsBinding
 import com.example.geographicatlas.models.Country
 import com.example.geographicatlas.utils.Resource
-import com.example.geographicatlas.viewmodels.CountryViewModel
+import com.example.geographicatlas.viewmodel.CountryViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class CountryDetailsFragment : Fragment() {
@@ -75,7 +77,13 @@ class CountryDetailsFragment : Fragment() {
             .into(binding.countryFlagImageView)
 
         val countryDetailsPair = country.toDetailsMap().toList()
-        countryDetailsAdapter = CountryDetailsAdapter(countryDetailsPair)
+
+        countryDetailsAdapter = CountryDetailsAdapter(countryDetailsPair){
+            val googleMapUri: Uri = Uri.parse(country.maps?.googleMaps ?: "")
+            val mapIntent = Intent(Intent.ACTION_VIEW, googleMapUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            startActivity(mapIntent)
+        }
         binding.countryDetailsList.adapter = countryDetailsAdapter
 
     }

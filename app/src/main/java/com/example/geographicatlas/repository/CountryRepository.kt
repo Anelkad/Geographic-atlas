@@ -36,7 +36,7 @@ class CountryRepositoryImp @Inject constructor(): CountryRepository {
                 val countries: List<Country> = Gson()
                     .fromJson(result, object : TypeToken<List<Country?>?>() {}.type)
                 //Log.d("countries: ", countries?.size.toString())
-                Resource.Success(groupCountriesByRegion(countries))
+                Resource.Success(groupCountriesGroupByRegion(countries))
             } catch (e: Exception) {
                 e.printStackTrace()
                 Resource.Failure(e)
@@ -60,7 +60,7 @@ class CountryRepositoryImp @Inject constructor(): CountryRepository {
         return resource
     }
 
-    override fun groupCountriesByRegion(countries: List<Country>): List<Pair<String, ArrayList<Country>>> {
+    override fun groupCountriesGroupByRegion(countries: List<Country>): List<Pair<String, ArrayList<Country>>> {
         val regionMap = HashMap<String, ArrayList<Country>>()
         for (i in countries) {
             if (regionMap.contains(i.continents[0]))
@@ -86,5 +86,5 @@ interface CountryRepository{
     fun getRequest(sUrl: String): String?
     fun getRegionMap(): Resource<List<Pair<String, ArrayList<Country>>>>
     fun getCountryDetails(cca2: String): Resource<Country>
-    fun groupCountriesByRegion(countries: List<Country>): List<Pair<String, ArrayList<Country>>>
+    fun groupCountriesGroupByRegion(countries: List<Country>): List<Pair<String, ArrayList<Country>>>
 }

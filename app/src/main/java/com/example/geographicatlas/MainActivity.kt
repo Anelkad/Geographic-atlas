@@ -1,11 +1,10 @@
 package com.example.geographicatlas
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.geographicatlas.databinding.ActivityMainBinding
-import com.example.geographicatlas.viewmodels.CountryViewModel
+import com.example.geographicatlas.viewmodel.CountryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

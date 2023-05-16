@@ -66,7 +66,7 @@
             android:id="@+id/expandedDetailsList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/expanded_details_item"
+            tools:listitem="@layout/country_expanded_details_item"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <TextView
@@ -76,7 +76,7 @@
             android:backgroundTint="#F7F8F9"
             android:text="@string/learn_more"
             android:textAllCaps="true"
-            android:padding="10dp"
+            android:padding="12dp"
             android:layout_marginBottom="5dp"
             android:textAppearance="@style/learn_more_label"
             android:gravity="center_horizontal|center_vertical"

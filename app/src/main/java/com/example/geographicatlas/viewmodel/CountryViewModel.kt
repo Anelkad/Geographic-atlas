@@ -1,4 +1,4 @@
-package com.example.geographicatlas.viewmodels
+package com.example.geographicatlas.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

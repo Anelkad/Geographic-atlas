@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.geographicatlas.databinding.CountryDetailsListItemBinding
 
 class CountryDetailsAdapter(
-    val countryDetailsPair: List<Pair<String,String>>
+    val countryDetailsPair: List<Pair<String,String>>,
+    val coordinatesClickListener:(()-> Unit)
 ): RecyclerView.Adapter<CountryDetailsAdapter.HolderCountry>() {
 
     lateinit var binding: CountryDetailsListItemBinding
@@ -33,6 +34,10 @@ class CountryDetailsAdapter(
     override fun onBindViewHolder(holder: HolderCountry, position: Int) {
         val property = countryDetailsPair[position].first
         val value = countryDetailsPair[position].second
+
+        if (property == "Capital coordinates:"){
+            holder.value.setOnClickListener { coordinatesClickListener() }
+        }
 
         holder.property.text = property
         holder.value.text = value

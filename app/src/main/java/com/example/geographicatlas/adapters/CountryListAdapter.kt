@@ -1,6 +1,5 @@
 package com.example.geographicatlas.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,7 @@ class CountryListAdapter(
 ): RecyclerView.Adapter<CountryListAdapter.HolderCountry>() {
 
     lateinit var binding: CountryListItemBinding
-    lateinit var expandedDetailsAdapter: ExpandedDetailsAdapter
+    lateinit var countryExpandedDetailsAdapter: CountryExpandedDetailsAdapter
 
     inner class HolderCountry(itemView: View): RecyclerView.ViewHolder(itemView){
         val flag = binding.countryFlagImageView
@@ -57,8 +56,8 @@ class CountryListAdapter(
         holder.name.text = name
         holder.capital.text = capital
 
-        expandedDetailsAdapter = ExpandedDetailsAdapter(country.toExpandedDetailsMap().toList())
-        holder.expandedDetailsList.adapter = expandedDetailsAdapter
+        countryExpandedDetailsAdapter = CountryExpandedDetailsAdapter(country.toExpandedDetailsMap().toList())
+        holder.expandedDetailsList.adapter = countryExpandedDetailsAdapter
 
         holder.countryDetailsButton.setOnClickListener { learnMoreClickListener(cca2) }
         holder.expandedDetails.isVisible = country.isExpanded
@@ -74,7 +73,7 @@ class CountryListAdapter(
             else
                 rotationAngle = if (rotationAngle == 180) 0 else 180
 
-            country.changeExpanded()
+            country.changeExpandStatus()
             holder.expandedDetails.isVisible = country.isExpanded
             holder.expandButton.animate().rotation(rotationAngle.toFloat()).start()
             //Log.i("Rotation angle", rotationAngle.toString())

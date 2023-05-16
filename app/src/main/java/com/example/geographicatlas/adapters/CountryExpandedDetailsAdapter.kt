@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.geographicatlas.databinding.ExpandedDetailsItemBinding
+import com.example.geographicatlas.databinding.CountryExpandedDetailsItemBinding
 
-class ExpandedDetailsAdapter(
+class CountryExpandedDetailsAdapter(
     val countryExpandedDetailsPair: List<Pair<String,String>>
-): RecyclerView.Adapter<ExpandedDetailsAdapter.HolderDetail>()  {
+): RecyclerView.Adapter<CountryExpandedDetailsAdapter.HolderDetail>()  {
 
-    lateinit var binding: ExpandedDetailsItemBinding
+    lateinit var binding: CountryExpandedDetailsItemBinding
 
     inner class HolderDetail(itemView: View): RecyclerView.ViewHolder(itemView){
         val property = binding.propertyText
@@ -20,14 +20,14 @@ class ExpandedDetailsAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ExpandedDetailsAdapter.HolderDetail {
-        binding = ExpandedDetailsItemBinding.inflate(
+    ): CountryExpandedDetailsAdapter.HolderDetail {
+        binding = CountryExpandedDetailsItemBinding.inflate(
             LayoutInflater.from(parent.context),parent,false
         )
         return HolderDetail(binding.root)
     }
 
-    override fun onBindViewHolder(holder: ExpandedDetailsAdapter.HolderDetail, position: Int) {
+    override fun onBindViewHolder(holder: CountryExpandedDetailsAdapter.HolderDetail, position: Int) {
         val property = countryExpandedDetailsPair[position].first
         val value = countryExpandedDetailsPair[position].second
 
