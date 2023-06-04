@@ -76,6 +76,11 @@ class CountryDetailsFragment : Fragment() {
         }
     }
 
+    override fun onDestroy() {
+        countryViewModel.clearCountryDetailsState()
+        super.onDestroy()
+    }
+
     private fun bindCountry(country: Country){
         binding.toolBar.title = country.name?.common
 
